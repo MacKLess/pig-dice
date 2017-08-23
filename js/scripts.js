@@ -1,6 +1,7 @@
 
 // Business Logic
-function Player (totalScore, roundScore){
+function Player (finalScore, totalScore, roundScore){
+  this.finalScore = finalScore;
   this.totalScore = [totalScore];
   this.roundScore = [roundScore];
 }
@@ -37,8 +38,8 @@ function roll(){
 // }
 //User Interface Logic
 $(document).ready(function(){
-  var playerOne = new Player(0,0);
-  var playerTwo = new Player(0,0);
+  var playerOne = new Player(0,0,0);
+  var playerTwo = new Player(0,0,0);
 
   $("#roll").click(function(){
     var rollScore = roll();
@@ -47,6 +48,7 @@ $(document).ready(function(){
     playerOne.roundScore.push(rollScore);
     var check = $("#rollScore").append(playerOne);
     console.log(playerOne);
+    $("#rollScore").text(rollScore);
 
   });
 
@@ -57,6 +59,8 @@ $(document).ready(function(){
     console.log(combineScore(sumOfRound));
     playerOne.totalScore.push(sumOfRound);
     playerOne.roundScore = [0];
+    $("#sumOfRolls").text(sumOfRound);
+
 
   });
 
