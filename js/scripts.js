@@ -5,11 +5,6 @@ function Player (totalScore, roundScore){
   this.roundScore = [roundScore];
 }
 
-// function addArray(){
-// var total = playerOne.reduce(function(sum, value) {
-//   return sum + value;
-// }, 0);
-// }
 
 function bust(thisRoll){
   if(thisRoll > 1){
@@ -25,6 +20,7 @@ function combineScore(points){
     sum += points[i];
   }
   console.log(sum);
+
   return sum;
 }
 
@@ -55,11 +51,13 @@ $(document).ready(function(){
   });
 
   $("#hold").click(function(){
-    // debugger;
+
     var points = playerOne.roundScore;
     var sumOfRound = combineScore(points);
     console.log(combineScore(sumOfRound));
     playerOne.totalScore.push(sumOfRound);
+    playerOne.roundScore = [0];
+
   });
 
 
