@@ -1,7 +1,7 @@
 
 // Business Logic
 function Player (finalScore, totalScore, roundScore){
-  this.finalScore = finalScore;
+  this.finalScore = [finalScore];
   this.totalScore = [totalScore];
   this.roundScore = [roundScore];
 }
@@ -24,6 +24,11 @@ function combineScore(points){
 
   return sum;
 }
+// 
+// function lastElement(array){
+//   finalElement = array.pop();
+//   return finalElement;
+// }
 
 
 function roll(){
@@ -60,6 +65,10 @@ $(document).ready(function(){
     playerOne.totalScore.push(sumOfRound);
     playerOne.roundScore = [0];
     $("#sumOfRolls").text(sumOfRound);
+    var finalPoints = playerOne.totalScore;
+    var totalSum = combineScore(finalPoints);
+    playerOne.finalScore.push(totalSum);
+
 
 
   });
