@@ -21,7 +21,6 @@ function roll(){
 Player.prototype.bust = function (playerOne, playerTwo, thisRoll){
   if(thisRoll === 1){
     // debugger;
-     this.totalScore = [];
      this.roundScore = [];
      if (playerOne.turn === true){
        playerOne.turn = false;
@@ -80,6 +79,11 @@ $(document).ready(function(){
     } else {
       $("#playerTwoTotal").text(totalSum);
     }
+    if (playerOne.finalScore >= 100){
+      $("#winner1").show();
+    }else if(playerTwo.finalScore>= 100){
+      $("#winner2").show();
+    };
     if (playerOne.turn === true){
       playerOne.turn = false;
       playerTwo.turn = true;
@@ -87,9 +91,6 @@ $(document).ready(function(){
     else {
       playerOne.turn = true;
       playerTwo.turn = false;
-    }
-    if (totalSum === 100){
-      return alert("Winner!");
     }
     console.log(activePlayer, "6")
   });

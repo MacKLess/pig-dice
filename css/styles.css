@@ -1,6 +1,12 @@
 #bustAlert{
   display:none;
 }
+#winner1{
+  display:none;
+}
+#winner2{
+  display:none;
+}
 .container {
   background-image: url("../img/background.jpg");
   padding: 5rem;
