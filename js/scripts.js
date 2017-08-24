@@ -14,19 +14,19 @@ function combineScore(points){
   }
   return sum;
 }
+
 function roll(){
   var rollResult = Math.floor((Math.random()*6) +1);
   return rollResult;
 }
+
 Player.prototype.bust = function (playerOne, playerTwo, thisRoll){
   if(thisRoll === 1){
-    // debugger;
      this.roundScore = [];
      if (playerOne.turn === true){
        playerOne.turn = false;
        playerTwo.turn = true;
-     }
-     else {
+     }else {
        playerOne.turn = true;
        playerTwo.turn = false;
      }
@@ -34,6 +34,7 @@ Player.prototype.bust = function (playerOne, playerTwo, thisRoll){
   }
   return false;
 }
+
 function setActivePlayer(playerOne, playerTwo, activePlayer){
   if (playerOne.turn === true){
     return playerOne;
@@ -48,11 +49,7 @@ $(document).ready(function(){
   var playerTwo = new Player(0,0,0,false);
   var activePlayer = "";
 
-
-  console.log(activePlayer, "1")
-
   $("#roll").click(function(){
-    // debugger;
     activePlayer = setActivePlayer(playerOne, playerTwo, activePlayer);
     $("#bustAlert").hide();
     var rollScore = roll();
@@ -63,7 +60,6 @@ $(document).ready(function(){
     activePlayer.roundScore.push(rollScore);
     $("#rollScore").text(rollScore);
     $("#sumOfRolls").text(combineScore(activePlayer.roundScore));
-
   });
 
   $("#hold").click(function(){
@@ -87,11 +83,9 @@ $(document).ready(function(){
     if (playerOne.turn === true){
       playerOne.turn = false;
       playerTwo.turn = true;
-    }
-    else {
+    }else {
       playerOne.turn = true;
       playerTwo.turn = false;
     }
-    console.log(activePlayer, "6")
   });
 });

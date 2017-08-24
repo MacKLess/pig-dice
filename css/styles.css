@@ -1,19 +1,54 @@
 #bustAlert{
   display:none;
+  width: 70%;
+  margin: 6rem;
+  background-color: rgb(89, 165, 99);
+  color: rgb(251, 255, 253)
 }
 #winner1{
   display:none;
+  margin: 2rem;
+  background-color: #ddbcbc;
+  color: #0a9223;
 }
 #winner2{
   display:none;
+  margin: 2rem;
+  background-color: #ddbcbc;
+  color: #0a9223;
 }
 .container {
   background-image: url("../img/background.jpg");
   padding: 5rem;
+  color: #5f5a5a;
 }
 h1 {
   text-align: center;
 }
-.well{
-  30%
+p {
+  text-align: center;
+  font-size: 24px;
+}
+.well {
+  border-radius: 2rem;
+}
+.col-sm-5 {
+  background-color: rgba(218, 179, 179, 0.8);
+  margin: 4rem;
+  text-align: center;
+}
+button {
+  margin-radius: 1rem;
+  margin-bottom: 3rem !important;
+  margin: 2rem;
+  background-color: #f5f5f5;
+}
+.jumbotron {
+  background-color: #f5f5f5;
+}
+.jumbotron p {
+  font-style: italic;
+}
+.jumbotron h1 {
+  color: #a58889;
 }
