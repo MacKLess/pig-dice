@@ -24,7 +24,7 @@ function combineScore(points){
 
   return sum;
 }
-// 
+//
 // function lastElement(array){
 //   finalElement = array.pop();
 //   return finalElement;
@@ -68,8 +68,9 @@ $(document).ready(function(){
     var finalPoints = playerOne.totalScore;
     var totalSum = combineScore(finalPoints);
     playerOne.finalScore.push(totalSum);
-
-
+    console.log(playerOne);
+    console.log(totalSum);
+    $("#playerOneTotal").text(totalSum);
 
   });
 
