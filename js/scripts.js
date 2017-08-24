@@ -53,7 +53,7 @@ $(document).ready(function(){
   console.log(activePlayer, "1")
 
   $("#roll").click(function(){
-    debugger;
+    // debugger;
     activePlayer = setActivePlayer(playerOne, playerTwo, activePlayer);
     $("#bustAlert").hide();
     var rollScore = roll();
@@ -87,6 +87,9 @@ $(document).ready(function(){
     else {
       playerOne.turn = true;
       playerTwo.turn = false;
+    }
+    if (totalSum === 100){
+      return alert("Winner!");
     }
     console.log(activePlayer, "6")
   });

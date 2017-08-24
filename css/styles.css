@@ -1,3 +1,13 @@
 #bustAlert{
   display:none;
 }
+.container {
+  background-image: url("../img/background.jpg");
+  padding: 5rem;
+}
+h1 {
+  text-align: center;
+}
+.well{
+  30%
+}
