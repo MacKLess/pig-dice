@@ -6,14 +6,15 @@ function Player (finalScore, totalScore, roundScore){
   this.roundScore = [roundScore];
 }
 
-
-function bust(thisRoll){
-  if(thisRoll > 1){
-    return true;
+Player.prototype.bust = function (thisRoll){
+  if(thisRoll === 1){
+    // debugger;
+     this.totalScore = [];
+     this.roundScore = [];
+     return true;
   }
   return false;
 }
-
 
 function combineScore(points){
   var sum = 0;
@@ -21,7 +22,6 @@ function combineScore(points){
     sum += points[i];
   }
   console.log(sum);
-
   return sum;
 }
 //
@@ -30,30 +30,29 @@ function combineScore(points){
 //   return finalElement;
 // }
 
-
 function roll(){
   var rollResult = Math.floor((Math.random()*6) +1);
   return rollResult;
 }
 
-
-// function Player (totalScore, roundScore){
-//   this.totalScore = [] ;
-//   this.roundScore = [];
-// }
 //User Interface Logic
 $(document).ready(function(){
   var playerOne = new Player(0,0,0);
   var playerTwo = new Player(0,0,0);
 
   $("#roll").click(function(){
+    $("#bustAlert").hide();
     var rollScore = roll();
-    var notOne = bust(rollScore);
-    console.log(notOne);
+    var one = playerOne.bust(rollScore);
+    if(one === true){ rollScore = 0
+    $("#bustAlert").show();};
     playerOne.roundScore.push(rollScore);
-    var check = $("#rollScore").append(playerOne);
-    console.log(playerOne);
+    // var check = $("#rollScore").append(playerOne);
+    // console.log(playerOne);
+
     $("#rollScore").text(rollScore);
+    $("#sumOfRolls").text(combineScore(playerOne.roundScore));
+
 
   });
 
@@ -64,12 +63,12 @@ $(document).ready(function(){
     console.log(combineScore(sumOfRound));
     playerOne.totalScore.push(sumOfRound);
     playerOne.roundScore = [0];
-    $("#sumOfRolls").text(sumOfRound);
+    // $("#sumOfRolls").text(sumOfRound);
     var finalPoints = playerOne.totalScore;
     var totalSum = combineScore(finalPoints);
     playerOne.finalScore.push(totalSum);
-    console.log(playerOne);
-    console.log(totalSum);
+    // console.log(playerOne);
+    // console.log(totalSum);
     $("#playerOneTotal").text(totalSum);
 
   });
