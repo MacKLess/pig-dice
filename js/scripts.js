@@ -79,9 +79,9 @@ $(document).ready(function(){
     } else {
       $("#playerTwoTotal").text(totalSum);
     }
-    if (playerOne.finalScore >= 100){
+    if (activePlayer === playerOne && totalSum >= 100){
       $("#winner1").show();
-    }else if(playerTwo.finalScore>= 100){
+    }else if (activePlayer === playerTwo && totalSum >= 100){
       $("#winner2").show();
     };
     if (playerOne.turn === true){
