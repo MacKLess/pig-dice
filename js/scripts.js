@@ -1,19 +1,10 @@
 
 // Business Logic
-function Player (finalScore, totalScore, roundScore){
+function Player (finalScore, totalScore, roundScore, turn){
   this.finalScore = [finalScore];
   this.totalScore = [totalScore];
   this.roundScore = [roundScore];
-}
-
-Player.prototype.bust = function (thisRoll){
-  if(thisRoll === 1){
-    // debugger;
-     this.totalScore = [];
-     this.roundScore = [];
-     return true;
-  }
-  return false;
+  this.turn = turn;
 }
 
 function combineScore(points){
@@ -21,57 +12,82 @@ function combineScore(points){
   for (i = 0; i < points.length; i++) {
     sum += points[i];
   }
-  console.log(sum);
   return sum;
 }
-//
-// function lastElement(array){
-//   finalElement = array.pop();
-//   return finalElement;
-// }
-
 function roll(){
   var rollResult = Math.floor((Math.random()*6) +1);
   return rollResult;
 }
+Player.prototype.bust = function (playerOne, playerTwo, thisRoll){
+  if(thisRoll === 1){
+    // debugger;
+     this.totalScore = [];
+     this.roundScore = [];
+     if (playerOne.turn === true){
+       playerOne.turn = false;
+       playerTwo.turn = true;
+     }
+     else {
+       playerOne.turn = true;
+       playerTwo.turn = false;
+     }
+     return true;
+  }
+  return false;
+}
+function setActivePlayer(playerOne, playerTwo, activePlayer){
+  if (playerOne.turn === true){
+    return playerOne;
+  } else {
+    return playerTwo;
+  }
+}
 
 //User Interface Logic
 $(document).ready(function(){
-  var playerOne = new Player(0,0,0);
-  var playerTwo = new Player(0,0,0);
+  var playerOne = new Player(0,0,0,true);
+  var playerTwo = new Player(0,0,0,false);
+  var activePlayer = "";
+
+
+  console.log(activePlayer, "1")
 
   $("#roll").click(function(){
+    debugger;
+    activePlayer = setActivePlayer(playerOne, playerTwo, activePlayer);
     $("#bustAlert").hide();
     var rollScore = roll();
-    var one = playerOne.bust(rollScore);
-    if(one === true){ rollScore = 0
+    var one = activePlayer.bust(playerOne, playerTwo, rollScore);
+    if(one === true){ rollScore = 0;
     $("#bustAlert").show();};
-    playerOne.roundScore.push(rollScore);
-    // var check = $("#rollScore").append(playerOne);
-    // console.log(playerOne);
-
+    console.log(activePlayer, "3");
+    activePlayer.roundScore.push(rollScore);
     $("#rollScore").text(rollScore);
-    $("#sumOfRolls").text(combineScore(playerOne.roundScore));
-
+    $("#sumOfRolls").text(combineScore(activePlayer.roundScore));
 
   });
 
   $("#hold").click(function(){
-
-    var points = playerOne.roundScore;
+    var points = activePlayer.roundScore;
     var sumOfRound = combineScore(points);
-    console.log(combineScore(sumOfRound));
-    playerOne.totalScore.push(sumOfRound);
-    playerOne.roundScore = [0];
-    // $("#sumOfRolls").text(sumOfRound);
-    var finalPoints = playerOne.totalScore;
+    activePlayer.totalScore.push(sumOfRound);
+    activePlayer.roundScore = [0];
+    var finalPoints = activePlayer.totalScore;
     var totalSum = combineScore(finalPoints);
-    playerOne.finalScore.push(totalSum);
-    // console.log(playerOne);
-    // console.log(totalSum);
-    $("#playerOneTotal").text(totalSum);
-
+    activePlayer.finalScore.push(totalSum);
+    if (activePlayer === playerOne){
+      $("#playerOneTotal").text(totalSum);
+    } else {
+      $("#playerTwoTotal").text(totalSum);
+    }
+    if (playerOne.turn === true){
+      playerOne.turn = false;
+      playerTwo.turn = true;
+    }
+    else {
+      playerOne.turn = true;
+      playerTwo.turn = false;
+    }
+    console.log(activePlayer, "6")
   });
-
-
 });
